@@ -1,81 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-
-List<string> students = new()
+﻿List<string> students = new()
 {
-    "Abel",
-    "Sara",
-    "Bizu"
+    "Bizuayehu"
 };
 
+
+
+
 bool isRunning = true;
-
-while (isRunning)
+static void ShowMenu()
 {
-    Console.Clear();
-
     Console.WriteLine("===== Student Management System =====");
     Console.WriteLine("1. View Students");
     Console.WriteLine("2. Add Student");
     Console.WriteLine("3. Remove Student");
-    Console.WriteLine("4. Search the student List: ");
-    Console.WriteLine("5. Display Total Number of student: ");
-    Console.WriteLine("6. Exit");
-    Console.Write("\nChoose an option: ");
+    Console.WriteLine("4. Exit");
+}
 
+static void ViewStudents(List<string> students)
+{
+    Console.WriteLine("\nStudent List:");
+
+    foreach (var student in students)
+    {
+        Console.WriteLine($"- {student}");
+    }
+}
+
+static void AddStudent(List<string> students)
+{
+    Console.Write("Enter student name: ");
+
+    string name = Console.ReadLine()!;
+
+    students.Add(name);
+
+    Console.WriteLine("Student added successfully.");
+}
+
+static void RemoveStudent(List<string> students)
+{
+    Console.Write("Enter student name: ");
+
+    string name = Console.ReadLine()!;
+
+    if (students.Remove(name))
+    {
+        Console.WriteLine("Student removed.");
+    }
+    else
+    {
+        Console.WriteLine("Student not found.");
+    }
+}
+
+while (isRunning)
+{
+   
+    ShowMenu();
     int choice = int.Parse(Console.ReadLine()!);
-
     switch (choice)
     {
         case 1:
-            Console.WriteLine("\nStudent List:");
-
-            foreach (var student in students)
-            {
-                Console.WriteLine($"- {student}");
-            }
+            ViewStudents(students);
             break;
 
         case 2:
-            Console.Write("Enter student name: ");
-            string newStudent = Console.ReadLine()!;
-            students.Add(newStudent);
-            Console.WriteLine("Student added successfully.");
+            AddStudent(students);
             break;
 
         case 3:
-            Console.Write("Enter student name to remove: ");
-            string removeStudent = Console.ReadLine()!;
-
-            if (students.Remove(removeStudent))
-            {
-                Console.WriteLine("Student removed.");
-            }
-            else
-            {
-                Console.WriteLine("Student not found.");
-            }
+            RemoveStudent(students);
             break;
 
         case 4:
-
-            string name = Console.ReadLine()!;
-            if (students.Contains(name))
-            {
-                Console.WriteLine($"student name {name} is found");
-            }
-            else
-            {
-                Console.WriteLine($"The student name {name} is not found😒");
-            }
-            break;
-        case 5:
-            string totalStudent = students.Count.ToString();
-            Console.WriteLine($"The total number of students {totalStudent}");
-            break;
-        case 6:
             isRunning = false;
-            Console.WriteLine("Goodbye!");
             break;
 
         default:
@@ -83,9 +81,6 @@ while (isRunning)
             break;
     }
 
-    if (isRunning)
-    {
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
-    }
+
+
 }
