@@ -17,12 +17,16 @@ class Program
         while (isRunning)
         {
             Console.Clear();
-
             ShowMenu();
 
             Console.Write("Choose an option: ");
 
-            int choice = int.Parse(Console.ReadLine()!);
+            if (!int.TryParse(Console.ReadLine(), out int choice))
+            {
+                ShowMessage("Please enter a valid number.");
+                Pause();
+                continue;
+            }
 
             switch (choice)
             {
@@ -31,60 +35,52 @@ class Program
                     break;
 
                 case 2:
-                    Console.Write("Enter student name: ");
+                    Console.Write("Student Name: ");
                     string newStudent = Console.ReadLine()!;
                     AddStudent(students, newStudent);
                     break;
 
                 case 3:
-                    Console.Write("Enter student name to remove: ");
+                    Console.Write("Student Name: ");
                     string removeStudent = Console.ReadLine()!;
 
                     if (RemoveStudent(students, removeStudent))
-                    {
-                        Console.WriteLine("Student removed successfully.");
-                    }
+                        ShowMessage("Student removed successfully.");
                     else
-                    {
-                        Console.WriteLine("Student not found.");
-                    }
+                        ShowMessage("Student not found.");
 
                     break;
 
                 case 4:
-                    Console.Write("Enter student name to search: ");
+                    Console.Write("Student Name: ");
                     string searchStudent = Console.ReadLine()!;
 
                     if (StudentExists(students, searchStudent))
-                    {
-                        Console.WriteLine("Student found.");
-                    }
+                        ShowMessage("Student found.");
                     else
-                    {
-                        Console.WriteLine("Student not found.");
-                    }
+                        ShowMessage("Student not found.");
 
                     break;
 
                 case 5:
-                    Console.WriteLine($"Total Students: {GetStudentCount(students)}");
+                    ShowMessage("Total Students", GetStudentCount(students));
                     break;
 
                 case 6:
                     isRunning = false;
-                    Console.WriteLine("Goodbye!");
+                    ShowMessage("Goodbye!");
+                    break;
+                case 7:
+                    RenameStudent(students);
                     break;
 
                 default:
-                    Console.WriteLine("Invalid option.");
+                    ShowMessage("Invalid choice.");
                     break;
             }
 
             if (isRunning)
-            {
-                Console.WriteLine("\nPress any key...");
-                Console.ReadKey();
-            }
+                Pause();
         }
     }
 
@@ -97,12 +93,26 @@ class Program
         Console.WriteLine("4. Search Student");
         Console.WriteLine("5. Total Students");
         Console.WriteLine("6. Exit");
+        Console.WriteLine("7. Rename the student name");
         Console.WriteLine();
+    }
+
+    static void RenameStudent(List<string> students)
+    {
+        string searchName = Console.ReadLine()!;
+
+        if (students.Contains(searchName))
+        {
+            int indexNumber = students.IndexOf(searchName);
+            Console.WriteLine("Please Enter the new name! ");
+            string RenamedStudent = Console.ReadLine()!;
+            students[indexNumber] = RenamedStudent;
+        }
     }
 
     static void ViewStudents(List<string> students)
     {
-        Console.WriteLine("\nStudent List:");
+        Console.WriteLine("\nStudents:");
 
         foreach (string student in students)
         {
@@ -113,7 +123,7 @@ class Program
     static void AddStudent(List<string> students, string studentName)
     {
         students.Add(studentName);
-        Console.WriteLine("Student added successfully.");
+        ShowMessage("Student added successfully.");
     }
 
     static bool RemoveStudent(List<string> students, string studentName)
@@ -129,5 +139,21 @@ class Program
     static int GetStudentCount(List<string> students)
     {
         return students.Count;
+    }
+
+    static void ShowMessage(string message)
+    {
+        Console.WriteLine(message);
+    }
+
+    static void ShowMessage(string title, int number)
+    {
+        Console.WriteLine($"{title}: {number}");
+    }
+
+    static void Pause()
+    {
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
     }
 }
