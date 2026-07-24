@@ -1,117 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 
-enum MenuOption
-{
-    ViewStudents = 1,
-    AddStudent,
-    RemoveStudent,
-    SearchStudent,
-    TotalStudents,
-    Exit
-}
-
-struct StudentStatistics
-{
-    public int TotalStudents;
-    public DateTime LastUpdated;
-}
-
 class Program
 {
     static void Main()
     {
-        List<string> students = new()
-        {
-            "Abel",
-            "Sara",
-            "Bizu"
-        };
+        List<Student> students = new();
 
-        StudentStatistics stats = new StudentStatistics
+        students.Add(new Student
         {
-            TotalStudents = students.Count,
-            LastUpdated = DateTime.Now
-        };
+            Name = "Abel",
+            Age = 20,
+            Email = "abel@example.com"
+        });
+
+        students.Add(new Student
+        {
+            Name = "Sara",
+            Age = 22,
+            Email = "sara@example.com"
+        });
 
         bool isRunning = true;
 
         while (isRunning)
         {
             Console.Clear();
-            ShowMenu();
+            ViewMain();
 
-            Console.Write("Choose an option: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int input))
+            if (!int.TryParse(Console.ReadLine(), out int choice))
             {
-                ShowMessage("Please enter a valid number.");
+                Console.WriteLine("Invalid input.");
                 Pause();
                 continue;
             }
 
-            MenuOption option = (MenuOption)input;
-
-            try
+            switch (choice)
             {
-                switch (option)
-                {
-                    case MenuOption.ViewStudents:
-                        ViewStudents(students);
-                        break;
+                case 1:
+                    ViewStudents(students);
+                    break;
 
-                    case MenuOption.AddStudent:
-                        Console.Write("Student Name: ");
-                        AddStudent(students, Console.ReadLine()!);
+                case 2:
+                    AddStudent(students);
+                    break;
 
-                        stats.TotalStudents = students.Count;
-                        stats.LastUpdated = DateTime.Now;
-                        break;
+                case 3:
+                    isRunning = false;
+                    break;
 
-                    case MenuOption.RemoveStudent:
-                        Console.Write("Student Name: ");
-                        string name = Console.ReadLine()!;
-
-                        if (RemoveStudent(students, name))
-                        {
-                            stats.TotalStudents = students.Count;
-                            stats.LastUpdated = DateTime.Now;
-                            ShowMessage("Student removed successfully.");
-                        }
-                        else
-                        {
-                            ShowMessage("Student not found.");
-                        }
-
-                        break;
-
-                    case MenuOption.SearchStudent:
-                        Console.Write("Student Name: ");
-                        string search = Console.ReadLine()!;
-
-                        ShowMessage(StudentExists(students, search)
-                            ? "Student found."
-                            : "Student not found.");
-                        break;
-
-                    case MenuOption.TotalStudents:
-                        Console.WriteLine($"Total Students : {stats.TotalStudents}");
-                        Console.WriteLine($"Last Updated   : {stats.LastUpdated}");
-                        break;
-
-                    case MenuOption.Exit:
-                        isRunning = false;
-                        ShowMessage("Goodbye!");
-                        break;
-
-                    default:
-                        ShowMessage("Invalid option.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage($"Error: {ex.Message}");
+                default:
+                    Console.WriteLine("Invalid option.");
+                    break;
             }
 
             if (isRunning)
@@ -119,51 +60,49 @@ class Program
         }
     }
 
-    static void ShowMenu()
+    static void ViewStudents(List<Student> students)
     {
-        Console.WriteLine("===== Student Management System =====");
-        Console.WriteLine("1. View Students");
-        Console.WriteLine("2. Add Student");
-        Console.WriteLine("3. Remove Student");
-        Console.WriteLine("4. Search Student");
-        Console.WriteLine("5. Total Students");
-        Console.WriteLine("6. Exit");
         Console.WriteLine();
+
+        foreach (Student student in students)
+        {
+            Console.WriteLine($"Name : {student.Name}");
+            Console.WriteLine($"Age  : {student.Age}");
+            Console.WriteLine($"Email: {student.Email}");
+            Console.WriteLine("=======================");
+        }
     }
 
-    static void ViewStudents(List<string> students)
+    static void AddStudent(List<Student> students)
     {
-        foreach (var student in students)
-            Console.WriteLine($"- {student}");
-    }
+        Student student = new Student();
 
-    static void AddStudent(List<string> students, string name)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Student name cannot be empty.");
+        Console.Write("Name : ");
+        student.Name = Console.ReadLine()!;
 
-        students.Add(name);
-        ShowMessage("Student added successfully.");
-    }
+        Console.Write("Age : ");
+        student.Age = int.Parse(Console.ReadLine()!);
 
-    static bool RemoveStudent(List<string> students, string name)
-    {
-        return students.Remove(name);
-    }
+        Console.Write("Email : ");
+        student.Email = Console.ReadLine()!;
 
-    static bool StudentExists(List<string> students, string name)
-    {
-        return students.Contains(name);
-    }
+        students.Add(student);
 
-    static void ShowMessage(string message)
-    {
-        Console.WriteLine(message);
+        Console.WriteLine("Student added successfully.");
     }
 
     static void Pause()
     {
-        Console.WriteLine("\nPress any key to continue...");
+        Console.WriteLine("\nPress any key...");
         Console.ReadKey();
+    }
+
+    static void ViewMain()
+    {
+        Console.WriteLine("===== Student Management System =====");
+        Console.WriteLine("1. View Students");
+        Console.WriteLine("2. Add Student");
+        Console.WriteLine("3. Exit");
+        Console.Write("Choose: ");
     }
 }
