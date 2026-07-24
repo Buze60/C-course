@@ -11,14 +11,20 @@ class Program
         {
             Name = "Abel",
             Age = 20,
-            Email = "abel@example.com"
+            Email = "abel@example.com",
+            Department = "Software Engineering",
+            GPA = 3.69
+            
         });
 
         students.Add(new Student
         {
             Name = "Sara",
             Age = 22,
-            Email = "sara@example.com"
+            Email = "sara@example.com",
+            Department = "Economics",
+            GPA = 3.4
+            
         });
 
         bool isRunning = true;
@@ -69,6 +75,8 @@ class Program
             Console.WriteLine($"Name : {student.Name}");
             Console.WriteLine($"Age  : {student.Age}");
             Console.WriteLine($"Email: {student.Email}");
+            Console.WriteLine($"Department: {student.Department}");
+            Console.WriteLine($"CGPA: {student.GPA}");
             Console.WriteLine("=======================");
         }
     }
