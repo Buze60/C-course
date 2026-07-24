@@ -1,6 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
+enum MenuOption
+{
+    ViewStudents = 1,
+    AddStudent,
+    RemoveStudent,
+    SearchStudent,
+    TotalStudents,
+    Exit
+}
+
+struct StudentStatistics
+{
+    public int TotalStudents;
+    public DateTime LastUpdated;
+}
+
 class Program
 {
     static void Main()
@@ -12,6 +28,12 @@ class Program
             "Bizu"
         };
 
+        StudentStatistics stats = new StudentStatistics
+        {
+            TotalStudents = students.Count,
+            LastUpdated = DateTime.Now
+        };
+
         bool isRunning = true;
 
         while (isRunning)
@@ -21,62 +43,75 @@ class Program
 
             Console.Write("Choose an option: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int choice))
+            if (!int.TryParse(Console.ReadLine(), out int input))
             {
                 ShowMessage("Please enter a valid number.");
                 Pause();
                 continue;
             }
 
-            switch (choice)
+            MenuOption option = (MenuOption)input;
+
+            try
             {
-                case 1:
-                    ViewStudents(students);
-                    break;
+                switch (option)
+                {
+                    case MenuOption.ViewStudents:
+                        ViewStudents(students);
+                        break;
 
-                case 2:
-                    Console.Write("Student Name: ");
-                    string newStudent = Console.ReadLine()!;
-                    AddStudent(students, newStudent);
-                    break;
+                    case MenuOption.AddStudent:
+                        Console.Write("Student Name: ");
+                        AddStudent(students, Console.ReadLine()!);
 
-                case 3:
-                    Console.Write("Student Name: ");
-                    string removeStudent = Console.ReadLine()!;
+                        stats.TotalStudents = students.Count;
+                        stats.LastUpdated = DateTime.Now;
+                        break;
 
-                    if (RemoveStudent(students, removeStudent))
-                        ShowMessage("Student removed successfully.");
-                    else
-                        ShowMessage("Student not found.");
+                    case MenuOption.RemoveStudent:
+                        Console.Write("Student Name: ");
+                        string name = Console.ReadLine()!;
 
-                    break;
+                        if (RemoveStudent(students, name))
+                        {
+                            stats.TotalStudents = students.Count;
+                            stats.LastUpdated = DateTime.Now;
+                            ShowMessage("Student removed successfully.");
+                        }
+                        else
+                        {
+                            ShowMessage("Student not found.");
+                        }
 
-                case 4:
-                    Console.Write("Student Name: ");
-                    string searchStudent = Console.ReadLine()!;
+                        break;
 
-                    if (StudentExists(students, searchStudent))
-                        ShowMessage("Student found.");
-                    else
-                        ShowMessage("Student not found.");
+                    case MenuOption.SearchStudent:
+                        Console.Write("Student Name: ");
+                        string search = Console.ReadLine()!;
 
-                    break;
+                        ShowMessage(StudentExists(students, search)
+                            ? "Student found."
+                            : "Student not found.");
+                        break;
 
-                case 5:
-                    ShowMessage("Total Students", GetStudentCount(students));
-                    break;
+                    case MenuOption.TotalStudents:
+                        Console.WriteLine($"Total Students : {stats.TotalStudents}");
+                        Console.WriteLine($"Last Updated   : {stats.LastUpdated}");
+                        break;
 
-                case 6:
-                    isRunning = false;
-                    ShowMessage("Goodbye!");
-                    break;
-                case 7:
-                    RenameStudent(students);
-                    break;
+                    case MenuOption.Exit:
+                        isRunning = false;
+                        ShowMessage("Goodbye!");
+                        break;
 
-                default:
-                    ShowMessage("Invalid choice.");
-                    break;
+                    default:
+                        ShowMessage("Invalid option.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage($"Error: {ex.Message}");
             }
 
             if (isRunning)
@@ -93,62 +128,37 @@ class Program
         Console.WriteLine("4. Search Student");
         Console.WriteLine("5. Total Students");
         Console.WriteLine("6. Exit");
-        Console.WriteLine("7. Rename the student name");
         Console.WriteLine();
-    }
-
-    static void RenameStudent(List<string> students)
-    {
-        string searchName = Console.ReadLine()!;
-
-        if (students.Contains(searchName))
-        {
-            int indexNumber = students.IndexOf(searchName);
-            Console.WriteLine("Please Enter the new name! ");
-            string RenamedStudent = Console.ReadLine()!;
-            students[indexNumber] = RenamedStudent;
-        }
     }
 
     static void ViewStudents(List<string> students)
     {
-        Console.WriteLine("\nStudents:");
-
-        foreach (string student in students)
-        {
+        foreach (var student in students)
             Console.WriteLine($"- {student}");
-        }
     }
 
-    static void AddStudent(List<string> students, string studentName)
+    static void AddStudent(List<string> students, string name)
     {
-        students.Add(studentName);
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Student name cannot be empty.");
+
+        students.Add(name);
         ShowMessage("Student added successfully.");
     }
 
-    static bool RemoveStudent(List<string> students, string studentName)
+    static bool RemoveStudent(List<string> students, string name)
     {
-        return students.Remove(studentName);
+        return students.Remove(name);
     }
 
-    static bool StudentExists(List<string> students, string studentName)
+    static bool StudentExists(List<string> students, string name)
     {
-        return students.Contains(studentName);
-    }
-
-    static int GetStudentCount(List<string> students)
-    {
-        return students.Count;
+        return students.Contains(name);
     }
 
     static void ShowMessage(string message)
     {
         Console.WriteLine(message);
-    }
-
-    static void ShowMessage(string title, int number)
-    {
-        Console.WriteLine($"{title}: {number}");
     }
 
     static void Pause()
