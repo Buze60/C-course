@@ -1,50 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {
-        List<Student> students = new();
+        Student student1 = new Student(
+            "Bizu",
+            24,
+            "bizu@example.com",
+            "Software Engineering",
+            3.90);
 
-        students.Add(new Student("Bizu", 24, "bizu@example.com", "Software Engineering", 3.69));
-        students.Add(new Student("Sara", 22, "sara@example.com", "Computer Science", 4));
+        Student student2 = new Student(
+            "Sara",
+            22,
+            "sara@example.com",
+            "Computer Science",
+            3.75);
 
-        Console.WriteLine("===== Student List =====\n");
+        Teacher teacher1 = new Teacher("Abebe", 25, 35000, "Geograpy");
+        Teacher teacher2 = new Teacher("Chala", 29, 35000, "maths");
 
-        foreach (Student student in students)
-        {
-            student.Display();
-        }
+        student1.Display();
+        student2.Display();
+        teacher1.Display();
+        teacher2.Display();
 
-        Console.WriteLine("\nCreate New Student\n");
-
-        Console.Write("Name: ");
-        string name = Console.ReadLine()!;
-
-        Console.Write("Age: ");
-        int age = int.Parse(Console.ReadLine()!);
-
-        Console.Write("Email: ");
-        string email = Console.ReadLine()!;
-
-        Console.Write("Department: ");
-        string department = Console.ReadLine()!;
-        Console.Write("GPA: ");
-        if (double.TryParse(Console.ReadLine(), out double gpa))
-        {
-            // Nothing happens
-        }
-
-        Student newStudent = new Student(name, age, email, department, gpa);
-
-        students.Add(newStudent);
-
-        Console.WriteLine("\nUpdated Student List\n");
-
-        foreach (Student student in students)
-        {
-            student.Display();
-        }
+        Console.WriteLine($"Total Students: {Student.TotalStudents}");
     }
 }

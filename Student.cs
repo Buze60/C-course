@@ -1,71 +1,37 @@
-public class Student
+using System;
+
+public class Student : Person
 {
-    private int _age;
+    public static int TotalStudents { get; private set; }
 
-    public string Name { get; set; } = "";
+    public string Email { get; private set; }
 
-    public string Email { get; set; } = "";
+    public string Department { get; private set; }
 
-    public string Department { get; set; } = "";
-    private double _gpa;
+    public double GPA { get; private set; }
 
-    public double GPA
+    public Student(
+        string name,
+        int age,
+        string email,
+        string department,
+        double gpa)
+        : base(name, age)
     {
-        get
-        {
-            return _gpa;
-        }
-        set
-        {
-            if (value >= 0 && value <= 4.0)
-            {
-                _gpa = value;
-            }
-            else
-            {
-                Console.WriteLine("Invalid GPA.");
-            }
-        }
-    }
-    public int Age
-    {
-        get
-        {
-            return _age;
-        }
-        set
-        {
-            if (value >= 20 && value <= 120)
-            {
-                _age = value;
-            }
-            else
-            {
-                Console.WriteLine("Invalid age. Age must be between 20 and 120.");
-            }
-        }
-    }
-
-    public Student()
-    {
-    }
-
-    public Student(string name, int age, string email, string department,double gpa)
-    {
-        Name = name;
-        Age = age;
         Email = email;
         Department = department;
         GPA = gpa;
+
+        TotalStudents++;
     }
 
-    public void Display()
+    public override void Display()
     {
-        Console.WriteLine("-----------------------------");
-        Console.WriteLine($"Name       : {Name}");
-        Console.WriteLine($"Age        : {Age}");
+        base.Display();
+
         Console.WriteLine($"Email      : {Email}");
         Console.WriteLine($"Department : {Department}");
-        Console.WriteLine($"GPA : {GPA}");
+        Console.WriteLine($"GPA        : {GPA:F2}");
+        Console.WriteLine("----------------------------");
     }
 }
