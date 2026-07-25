@@ -7,110 +7,44 @@ class Program
     {
         List<Student> students = new();
 
-        students.Add(new Student
-        {
-            Name = "Abel",
-            Age = 20,
-            Email = "abel@example.com",
-            Department = "Software Engineering",
-            GPA = 3.69
-            
-        });
+        students.Add(new Student("Bizu", 24, "bizu@example.com", "Software Engineering", 3.69));
+        students.Add(new Student("Sara", 22, "sara@example.com", "Computer Science", 4));
 
-        students.Add(new Student
-        {
-            Name = "Sara",
-            Age = 22,
-            Email = "sara@example.com",
-            Department = "Economics",
-            GPA = 3.4
-            
-        });
-
-        bool isRunning = true;
-
-        while (isRunning)
-        {
-            Console.Clear();
-            ViewMain();
-
-
-            if (!int.TryParse(Console.ReadLine(), out int choice))
-            {
-                Console.WriteLine("Invalid input.");
-                Pause();
-                continue;
-            }
-
-            switch (choice)
-            {
-                case 1:
-                    ViewStudents(students);
-                    break;
-
-                case 2:
-                    AddStudent(students);
-                    break;
-
-                case 3:
-                    isRunning = false;
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid option.");
-                    break;
-            }
-
-            if (isRunning)
-                Pause();
-        }
-    }
-
-    static void ViewStudents(List<Student> students)
-    {
-        Console.WriteLine();
+        Console.WriteLine("===== Student List =====\n");
 
         foreach (Student student in students)
         {
-            Console.WriteLine($"Name : {student.Name}");
-            Console.WriteLine($"Age  : {student.Age}");
-            Console.WriteLine($"Email: {student.Email}");
-            Console.WriteLine($"Department: {student.Department}");
-            Console.WriteLine($"CGPA: {student.GPA}");
-            Console.WriteLine("=======================");
+            student.Display();
         }
-    }
 
-    static void AddStudent(List<Student> students)
-    {
-        Student student = new Student();
+        Console.WriteLine("\nCreate New Student\n");
 
-        Console.Write("Name : ");
-        student.Name = Console.ReadLine()!;
+        Console.Write("Name: ");
+        string name = Console.ReadLine()!;
 
-        Console.Write("Age : ");
-        student.Age = int.Parse(Console.ReadLine()!);
+        Console.Write("Age: ");
+        int age = int.Parse(Console.ReadLine()!);
 
-        Console.Write("Email : ");
-        student.Email = Console.ReadLine()!;
+        Console.Write("Email: ");
+        string email = Console.ReadLine()!;
 
-        students.Add(student);
+        Console.Write("Department: ");
+        string department = Console.ReadLine()!;
+        Console.Write("GPA: ");
+        if (double.TryParse(Console.ReadLine(), out double gpa))
+        {
+            // Nothing happens
+        }
 
-        Console.WriteLine("Student added successfully.");
-    }
+        Student newStudent = new Student(name, age, email, department, gpa);
 
-    static void Pause()
-    {
-        Console.WriteLine("\nPress any key...");
-        Console.ReadKey();
-    }
+        students.Add(newStudent);
 
-    static void ViewMain()
-    {
-        Console.WriteLine("===== Student Management System =====");
-        Console.WriteLine("1. View Students");
-        Console.WriteLine("2. Add Student");
-        Console.WriteLine("3. Exit");
-        Console.Write("Choose: ");
+        Console.WriteLine("\nUpdated Student List\n");
+
+        foreach (Student student in students)
+        {
+            student.Display();
+        }
     }
 }
