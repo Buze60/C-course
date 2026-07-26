@@ -1,31 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {
-        Student student1 = new Student(
+        List<Person> people = new();
+
+        people.Add(new Student(
             "Bizu",
             24,
-            "bizu@example.com",
-            "Software Engineering",
-            3.90);
+            "Software Engineering"));
 
-        Student student2 = new Student(
+        people.Add(new Teacher(
             "Sara",
+            35,
+            "Mathematics"));
+
+        people.Add(new Student(
+            "Abel",
             22,
-            "sara@example.com",
-            "Computer Science",
-            3.75);
+            "Computer Science"));
 
-        Teacher teacher1 = new Teacher("Abebe", 25, 35000, "Geograpy");
-        Teacher teacher2 = new Teacher("Chala", 29, 35000, "maths");
 
-        student1.Display();
-        student2.Display();
-        teacher1.Display();
-        teacher2.Display();
+        people.Add(new Administrator("Bizuayehu", 30, 30, "management"));
+        people.Add(new Administrator("Birara", 30, 30, "Dupty Manager"));
 
-        Console.WriteLine($"Total Students: {Student.TotalStudents}");
+        Console.WriteLine("===== People =====\n");
+
+        foreach (Person person in people)
+        {
+            Console.WriteLine(person.Display());
+        }
+
+        Console.WriteLine("Checking object types...\n");
+
+        foreach (Person person in people)
+        {
+            if (person is Student student)
+            {
+                Console.WriteLine($"{student.Name} is a Student.");
+            }
+            else if (person is Teacher teacher)
+            {
+                Console.WriteLine($"{teacher.Name} is a Teacher.");
+            }
+            else if (person is Administrator admin)
+            {
+                Console.WriteLine($"{admin.Name} is a Adminstractor");
+            }
+
+        }
     }
 }

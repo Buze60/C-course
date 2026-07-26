@@ -1,8 +1,9 @@
+using System;
+
 public class Person
 {
-    public string Name { get; private set; }
-
-    public int Age { get; private set; }
+    public string Name { get; }
+    public int Age { get; }
 
     public Person(string name, int age)
     {
@@ -10,9 +11,9 @@ public class Person
         Age = age;
     }
 
-    public virtual void Display()
+    public virtual string Display()
+    
     {
-        Console.WriteLine($"Name : {Name}");
-        Console.WriteLine($"Age  : {Age}");
+        return ($"Name : {Name}\nAge  : {Age}");
     }
 }

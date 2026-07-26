@@ -1,37 +1,17 @@
-using System;
-
 public class Student : Person
 {
-    public static int TotalStudents { get; private set; }
+    public string Department { get; }
 
-    public string Email { get; private set; }
-
-    public string Department { get; private set; }
-
-    public double GPA { get; private set; }
-
-    public Student(
-        string name,
-        int age,
-        string email,
-        string department,
-        double gpa)
+    public Student(string name, int age, string department)
         : base(name, age)
     {
-        Email = email;
         Department = department;
-        GPA = gpa;
-
-        TotalStudents++;
     }
 
-    public override void Display()
+    public override string Display()
     {
-        base.Display();
+        Console.WriteLine("=== Student ===");
+        return $"{base.Display()}\nDepartment : {Department}";
 
-        Console.WriteLine($"Email      : {Email}");
-        Console.WriteLine($"Department : {Department}");
-        Console.WriteLine($"GPA        : {GPA:F2}");
-        Console.WriteLine("----------------------------");
     }
 }
