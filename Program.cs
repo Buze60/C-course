@@ -4,13 +4,40 @@ class Program
 {
     static void Main()
     {
-        Student student = new Student("Bizu", 24);
+        INotificationService email =
+            new EmailService();
 
-        student.RegisterCourse("C# Programming");
-        student.RegisterCourse("ASP.NET Core");
+        Student student1 =
+            new Student("Bizu", email);
 
-        student.DropCourse("C# Programming");
+        student1.RegisterCourse("ASP.NET Core");
 
-        student.Display();
+        Console.WriteLine();
+
+        INotificationService sms =
+            new SmsService();
+
+        Student student2 =
+            new Student("Sara", sms);
+
+        student2.RegisterCourse("C# Advanced");
+
+        Console.WriteLine();
+
+        INotificationService push =
+            new PushNotificationService();
+
+        Student student3 =
+            new Student("Abel", push);
+
+        student3.RegisterCourse("Entity Framework Core");
+
+        Console.WriteLine();
+
+        INotificationService whatsUp = new WhatsAppService();
+        Student student4 = new Student("Mr.x", whatsUp);
+
+        student4.RegisterCourse("Web API Development");
+
     }
 }
