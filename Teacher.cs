@@ -1,17 +1,21 @@
-// public class Teacher : Person
-// {
-//     public string Subject { get; }
+using System;
 
-//     public Teacher(string name, int age, string subject)
-//         : base(name, age)
-//     {
-//         Subject = subject;
-//     }
+public class Teacher : Person
+{
+    public string Subject { get; }
 
-//     public override string Display()
-//     {
-//         Console.WriteLine("=== Teacher ===");
-//         return $"{base.Display()}\nSubject : {Subject}";
+    public Teacher(string name, int age, string subject)
+        : base(name, age)
+    {
+        Subject = subject;
+    }
 
-//     }
-// }
+    public override void Introduce()
+    {
+        Console.WriteLine("=== Teacher ===");
+        ShowBasicInfo();
+        Console.WriteLine($"Subject : {Subject}");
+        Console.WriteLine("I teach university students.");
+        Console.WriteLine();
+    }
+}

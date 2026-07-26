@@ -6,4 +6,9 @@ public class PushNotificationService : INotificationService
     {
         Console.WriteLine($"🔔 Push: {message}");
     }
+
+    public void Recived(string id)
+    {
+        Console.WriteLine($"Hello from .NET");
+    }
 }

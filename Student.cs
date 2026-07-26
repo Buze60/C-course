@@ -1,24 +1,21 @@
 using System;
 
-public class Student
+public class Student : Person
 {
-    public string Name { get; }
+    public string Department { get; }
 
-    private readonly INotificationService _notificationService;//SMS type(dependancy injection)
-
-    public Student(
-        string name,
-        INotificationService notificationService)
+    public Student(string name, int age, string department)
+        : base(name, age)
     {
-        Name = name;
-        _notificationService = notificationService;
+        Department = department;
     }
 
-    public void RegisterCourse(string courseName)
+    public override void Introduce()
     {
-        Console.WriteLine($"{Name} registered for {courseName}.");
-
-        _notificationService.Send(
-            $"Hello {Name}, your registration for '{courseName}' was successful.");
+        Console.WriteLine("=== Student ===");
+        ShowBasicInfo();
+        Console.WriteLine($"Department : {Department}");
+        Console.WriteLine("I am studying at the university.");
+        Console.WriteLine();
     }
 }

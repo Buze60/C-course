@@ -4,4 +4,9 @@ public class WhatsAppService : INotificationService
     {
         Console.WriteLine($"💬 WhatsApp: {message}");
     }
+
+    public void Recived(string id)
+    {
+        Console.WriteLine($"Recived: {id}");
+    }
 }

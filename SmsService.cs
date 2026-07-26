@@ -6,4 +6,9 @@ public class SmsService : INotificationService
     {
         Console.WriteLine($"📱 SMS: {message}");
     }
+
+    public void Recived(string id)
+    {
+        Console.WriteLine($"Hello from .NET");
+    }
 }

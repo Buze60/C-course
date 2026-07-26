@@ -6,4 +6,8 @@ public class EmailService : INotificationService
     {
         Console.WriteLine($"📧 Email: {message}");
     }
+    public void Recived(string id)
+    {
+        Console.WriteLine($"Hello from .NET");
+    }
 }
