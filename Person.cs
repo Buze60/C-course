@@ -11,9 +11,9 @@ public class Person
         Age = age;
     }
 
-    public virtual string Display()
-    
+    public virtual void Display()
     {
-        return ($"Name : {Name}\nAge  : {Age}");
+        Console.WriteLine($"Name : {Name}");
+        Console.WriteLine($"Age  : {Age}");
     }
 }
