@@ -1,0 +1,17 @@
+<Project>
+
+  <!--
+    Directory.Build.props is read by MSBuild for EVERY .csproj under this folder.
+    Settings here apply to all projects so we don't repeat them in each file.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+</Project>

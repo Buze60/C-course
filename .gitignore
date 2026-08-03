@@ -1,0 +1,12 @@
+# Build output
+bin/
+obj/
+
+# Runtime data (the app writes its task store here)
+tasks.json
+
+# IDE
+.vs/
+.idea/
+*.user
+*.suo
