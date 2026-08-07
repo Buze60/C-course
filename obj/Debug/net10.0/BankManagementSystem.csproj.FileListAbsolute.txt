@@ -1,0 +1,14 @@
+C:\Users\buze5\BankManagementSystem\bin\Debug\net10.0\BankManagementSystem.exe
+C:\Users\buze5\BankManagementSystem\bin\Debug\net10.0\BankManagementSystem.deps.json
+C:\Users\buze5\BankManagementSystem\bin\Debug\net10.0\BankManagementSystem.runtimeconfig.json
+C:\Users\buze5\BankManagementSystem\bin\Debug\net10.0\BankManagementSystem.dll
+C:\Users\buze5\BankManagementSystem\bin\Debug\net10.0\BankManagementSystem.pdb
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.AssemblyInfoInputs.cache
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.AssemblyInfo.cs
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.dll
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\refint\BankManagementSystem.dll
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.pdb
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.genruntimeconfig.cache
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\ref\BankManagementSystem.dll
