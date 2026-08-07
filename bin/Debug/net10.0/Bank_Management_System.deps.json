@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Bank_Management_System/1.0.0": {
+        "runtime": {
+          "Bank_Management_System.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Bank_Management_System/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
