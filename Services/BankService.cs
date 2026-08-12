@@ -1,17 +1,18 @@
 public class BankService
 {
     private readonly IBankRepository repository;
-    public event Action<BankAccount, decimal>? MoneyWithdrawn;
+    private readonly ITransactionService transactionService;
+    public event EventHandler<MoneyWithdrawnEventArgs>? MoneyWithdrawn;
+    public event EventHandler<MoneyDepositedEventArgs>? MoneyDeposited;
 
-    public BankService(IBankRepository repository)
+
+    public BankService(IBankRepository repository, ITransactionService transactionService)
     {
         this.repository = repository;
+        this.transactionService = transactionService;
     }
     //CREATE NEW ACCOUNT 
-    public void CreateAccount(
-    int accountNumber,
-    string ownerName,
-    decimal initialBalance)
+    public void CreateAccount(int accountNumber, string ownerName, decimal initialBalance)
     {
         BankAccount account = new BankAccount
         {
@@ -21,7 +22,6 @@ public class BankService
         };
 
         repository.Add(account);
-
     }
 
     // GET THE CREATED ACCOUNT
@@ -40,20 +40,34 @@ public class BankService
 
         if (account == null)
         {
-            Console.WriteLine("Account not found.");
-            return;
+            throw new InvalidOperationException(
+          $"Account {accountNumber} was not found."
+      );
+        }
+
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Deposit amount must be greater than zero.");
         }
 
         account.Balance += amount;
 
-        Transaction transaction = new Transaction
-        {
-            Date = DateTime.Now,
-            Type = "Deposit",
-            Amount = amount
-        };
+        transactionService.AddTransaction(
 
-        account.Transactions.Add(transaction);
+            account,
+            TransactionType.Deposit,
+            amount
+        );
+
+        MoneyDeposited?.Invoke(
+            this,
+            new MoneyDepositedEventArgs(
+                account,
+                amount,
+                account.Balance
+            )
+        );
+
     }
 
     // WITHDRAW METHOD
@@ -64,29 +78,37 @@ public class BankService
 
         if (account == null)
         {
-            Console.WriteLine("Account not found.");
-            return;
+            throw new InvalidOperationException("Account not found.");
+        }
+
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Withdrawal amount must be greater than zero.");
         }
 
         if (account.Balance < amount)
         {
-            Console.WriteLine("Insufficient balance.");
-            return;
+            throw new InvalidOperationException(
+        "Insufficient balance."
+    );
+
         }
 
         account.Balance -= amount;
 
-        Transaction transaction = new Transaction
-        {
-            Date = DateTime.Now,
-            Type = "Withdrawal",
-            Amount = amount
-        };
+        transactionService.AddTransaction(
+            account,
+            TransactionType.Withdrawal,
+            amount
+        );
 
-        account.Transactions.Add(transaction);
-
-        MoneyWithdrawn?.Invoke(account, amount);
+        MoneyWithdrawn?.Invoke(
+            this,
+            new MoneyWithdrawnEventArgs(
+                account,
+                amount,
+                account.Balance
+            )
+        );
     }
-
-
 }

@@ -1,7 +1,12 @@
 public class SmsNotification
 {
-    public void SendSms(BankAccount account,decimal amount)
+    public void SendSmsNotification(
+    object? sender,
+    MoneyWithdrawnEventArgs e)
     {
-        Console.WriteLine($"SMS: {account.OwnerName}, " + $"{amount} was withdrawn from your account.");
+        Console.WriteLine(
+            $"SMS:💬 {e.Account.OwnerName}\nAmoutn:{e.Amount} was withdrawn. \nRemaining balance: {e.RemainingBalance}"
+        );
     }
+
 }

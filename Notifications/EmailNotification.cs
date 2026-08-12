@@ -1,12 +1,13 @@
 public class EmailNotification
 {
-    public void SendEmail(
-        BankAccount account,
-        decimal amount)
+    public void SendEmailWithdraw(
+        object? sender,
+        MoneyWithdrawnEventArgs e)
     {
         Console.WriteLine(
-            $"EMAIL: {account.OwnerName}, " +
-            $"{amount} was withdrawn from your account."
+            $"Email:📧 {e.Account.OwnerName}\nAmoutn:{e.Amount} was withdrawn. \nRemaining balance: {e.RemainingBalance}"
         );
     }
+
+
 }

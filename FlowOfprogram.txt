@@ -1,0 +1,51 @@
+BridgeBank
+│
+├── Models
+│   ├── BankAccount.cs
+│   ├── Transaction.cs
+│   ├── TransactionFilter.cs
+│   └── TransactionCompletedEventArgs.cs
+│
+├── Interfaces
+│   ├── IBankRepository.cs
+│   ├── IBankService.cs
+│   ├── ITransactionService.cs
+│   └── ITransactionReportService.cs
+│
+├── Repositories
+│   └── BankRepository.cs
+│
+├── Services
+│   ├── BankService.cs
+│   ├── TransactionService.cs
+│   ├── TransactionReportService.cs
+│   ├── NotificationService.cs
+│   └── AuditService.cs
+│
+└── Program.cs
+
+
+                          PROGRAM
+                            │
+                            │ calls
+                            ▼
+                      BANK SERVICE
+                       /          \
+                      /            \
+                     ▼              ▼
+             BANK REPOSITORY   TRANSACTION SERVICE
+                                      │
+                                      │ creates
+                                      ▼
+                                 TRANSACTION
+                                      │
+                                      ▼
+                            ACCOUNT.TRANSACTIONS
+                                      │
+                                      │ raises
+                                      ▼
+                           TRANSACTION COMPLETED
+                              /               \
+                             ▼                 ▼
+                     NOTIFICATION           AUDIT
+                       SERVICE              SERVICE

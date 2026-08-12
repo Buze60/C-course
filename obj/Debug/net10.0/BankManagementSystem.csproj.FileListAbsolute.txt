@@ -12,3 +12,4 @@ C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\refint\BankManagementSyste
 C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.pdb
 C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.genruntimeconfig.cache
 C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\ref\BankManagementSystem.dll
+C:\Users\buze5\BankManagementSystem\obj\Debug\net10.0\BankManagementSystem.sourcelink.json
