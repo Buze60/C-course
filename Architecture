@@ -1,0 +1,30 @@
+ECommerceBridge/
+│
+├── Models/
+│   ├── Customer.cs
+│   ├── Product.cs
+│   ├── Order.cs
+│   ├── OrderItem.cs
+│   └── Payment.cs
+│
+├── Interfaces/
+│   ├── IProductRepository.cs
+│   ├── ICustomerRepository.cs
+│   ├── IOrderRepository.cs
+│   ├── IProductService.cs
+│   ├── IOrderService.cs
+│   └── IPaymentService.cs
+│
+├── Repositories/
+│   ├── ProductRepository.cs
+│   ├── CustomerRepository.cs
+│   └── OrderRepository.cs
+│
+├── Services/
+│   ├── ProductService.cs
+│   ├── OrderService.cs
+│   ├── PaymentService.cs
+│   ├── NotificationService.cs
+│   └── AuditService.cs
+│
+└── Program.cs

@@ -1,0 +1,14 @@
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.AssemblyInfoInputs.cache
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.AssemblyInfo.cs
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.csproj.CoreCompileInputs.cache
+C:\Users\buze5\ECommerceBridge\bin\Debug\net10.0\ECommerceBridge.exe
+C:\Users\buze5\ECommerceBridge\bin\Debug\net10.0\ECommerceBridge.deps.json
+C:\Users\buze5\ECommerceBridge\bin\Debug\net10.0\ECommerceBridge.runtimeconfig.json
+C:\Users\buze5\ECommerceBridge\bin\Debug\net10.0\ECommerceBridge.dll
+C:\Users\buze5\ECommerceBridge\bin\Debug\net10.0\ECommerceBridge.pdb
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.dll
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\refint\ECommerceBridge.dll
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.pdb
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ECommerceBridge.genruntimeconfig.cache
+C:\Users\buze5\ECommerceBridge\obj\Debug\net10.0\ref\ECommerceBridge.dll
